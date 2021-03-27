@@ -1,9 +1,12 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,38 +21,23 @@ namespace Business.Concrete
         {
             _productDal = productDal;
         }
-
-        /*  public void Add(Product product)
-          {
-              //business codes
-              //ekleme şartları diyebiliriz 
-              _productDal.Add(product);
-          }
-        */
-       //IproductService de void değiştiği için aşağıdaki gibi oldu
         public IResult Add(Product product)
         {
-            if(product.ProductName.Length<2)
-            {
-                //magic strings
-                //return new ErrorResult("ürün ismi en az 2 karakter olmalıdır");
-                return new ErrorResult(Messages.ProductNameInvalid);
-            }
+            //business codes
+            //validation
+            //context ilgili bi thread ı anlatır
+            //aşağıdaki şeyler tek satır olsa da kodu kötüleştirir.Bunun için de bir yapı kuracaz.
+            //loglama
+            //cacheremove
+            //performence
+            //transaction
+            //yetkilendirme
+            ValidationTool.Validate(new ProductValidator(), product);
             _productDal.Add(product);
-            //return kısmını yazmassak add den hata yiyoruz:d
-            //return new Result() tu ama constructor ekleyerek aşağıdaki gibi paremetre yazabiliyoruz.
-            //return new Result(true, "Ürün eklendi");
-            //mesaj göndermek istemeyebilir vs vs 
+        
+                       
             return new SuccessResult(Messages.ProductAdded);
         }
-
-        /* public List<Product> GetAll()
-         {
-             //iş kodları
-             //yetkisi var mı?
-             return _productDal.GetAll();
-         }
-        */
          public IDataResult<List<Product>> GetAll()
        {
            //iş kodları
