@@ -5,8 +5,11 @@ using System.Text;
 
 namespace Core.CrossCuttingConcerns.Validation
 {
-   public static class ValidationTool
+    public static class ValidationTool
     {
+        //genele taşıdık
+        //productmanager de yapmak bizi tekrara düşürcekti
+
         public static void Validate(IValidator validator, object entity)
         {
             var context = new ValidationContext<object>(entity);
@@ -17,4 +20,5 @@ namespace Core.CrossCuttingConcerns.Validation
 
             }
         }
+    }
 }
