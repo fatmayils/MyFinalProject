@@ -1,4 +1,4 @@
-﻿using Castle.DynamicProxy;
+﻿using Castle.DynamicProxy;//autofac intercaption özelliğinden geliyor
 using System;
 
 namespace Core.Utilities.Interceptors
@@ -8,6 +8,7 @@ namespace Core.Utilities.Interceptors
         {
             public int Priority { get; set; }//öncelik
 
+        //i.i boş sonra doldurcazl
             public virtual void Intercept(IInvocation invocation)
             {
 

@@ -35,7 +35,7 @@ namespace WebAPI
             //Postsharp:ücretli ama ücretsiz olarak yapýlan bazý þeyleri var,autofack otomatik yapýlandýrma yapýyo
             //startapta yaptýðýmýz þeyi backendde yapýyo
             //baþka bir api eklersek patlarýz
-            //bu yüzden outofack yapýlandýrmasý kullancaz...
+            //bu yüzden outofac yapýlandýrmasý kullancaz...
             services.AddControllers();
             //services.AddSingleton<IProductService,ProductManager>();//bana arka planda bir referans oluþtur
             //services.AddSingleton<IProductDal, EfProductDal>();//bana arka planda bir referans oluþtur

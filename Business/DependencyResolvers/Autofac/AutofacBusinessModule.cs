@@ -21,14 +21,17 @@ namespace Business.DependencyResolvers.Autofac
             //addsingleton a karşılık geliyor,sondaki tek bir instance üretiyo
             builder.RegisterType<ProductManager>().As<IProductService>().SingleInstance();
             builder.RegisterType<EfProductDal>().As<IProductDal>().SingleInstance();
-
-            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
-
-            builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
+            //sadece yukardakini yazarsak çalışmaz program,program cs e git tanıt kendini
+            builder.RegisterType<CategoryManager>().As<ICategoryService>().SingleInstance();
+            builder.RegisterType<EfCategoryDal>().As<ICategoryDal>().SingleInstance();
+            //en en en son,aspect ten sonra bunu yazman lazım,intercepter ler aşağıdaki kodla devreye giriyor
+            var assembly = System.Reflection.Assembly.GetExecutingAssembly();//çalışan uygulama içinde
+            builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()//implemente edilmiş interface leri bul
                 .EnableInterfaceInterceptors(new ProxyGenerationOptions()
                 {
-                    Selector = new AspectInterceptorSelector()
+                    Selector = new AspectInterceptorSelector()//onlara bu şeyi çağır ****
                 }).SingleInstance();
         }
     }
 }
+//registerşerden sonra ilk yıldız çalışçak,intercepter var mı diye bakacak

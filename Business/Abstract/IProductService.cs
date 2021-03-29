@@ -17,6 +17,7 @@ namespace Business.Abstract
         // void Add(Product product);
         //void yerine aşağıdaki ifadeyi yazdık
         IResult Add(Product product);
+        IResult Update(Product product);
 
     }
 }

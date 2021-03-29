@@ -22,11 +22,12 @@ namespace WebAPI
         //yayýn þeysi,server ile ilgili configuration un olduðu yer
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+            //yeni
             .UseServiceProviderFactory(new AutofacServiceProviderFactory())
             .ConfigureContainer<ContainerBuilder>(builder=>
             {
                 builder.RegisterModule(new AutofacBusinessModule());
-            })
+            })//yeni son
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

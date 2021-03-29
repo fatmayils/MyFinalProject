@@ -7,11 +7,13 @@ using System.Text;
 
 namespace Core.Utilities.Interceptors
 {
-
+    //
     public class AspectInterceptorSelector : IInterceptorSelector
     {
         public IInterceptor[] SelectInterceptors(Type type, MethodInfo method, IInterceptor[] interceptors)
         {
+            //clasın,metodun attribute lerini oku,onları bul ve bir listeye koy
+            //onların çalışma sırasını da öncelik sırasına göre sırala
             var classAttributes = type.GetCustomAttributes<MethodInterceptionBaseAttribute>
                 (true).ToList();
             var methodAttributes = type.GetMethod(method.Name)
